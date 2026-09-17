@@ -1,44 +1,85 @@
 # DoseTrace AI
 
-Local React + TypeScript + Tailwind prototype built from the uploaded DoseTrace specification. All 20 patients are fictional. No backend, API keys, or external patient data are used.
+### Detect the pattern. Don't assume the patient.
 
-## Run
+🌐 **[Open the Live Demo](https://galdrabok.github.io/DoseTraceAI/)**
 
-With Node.js 22+ and pnpm available:
+DoseTrace AI is a healthcare hackathon prototype for **The Vanishing Dose** problem: identifying patterns that may suggest medication-adherence disruption between prescription and follow-up.
 
-```sh
-pnpm install
-pnpm dev
-```
+It combines indirect healthcare signals, explains the evidence, and keeps the clinician in control.
 
-Open http://127.0.0.1:5173 and select **Explore demo → Enter Demo**.
+## Try It
 
-On this computer, if Node is not on your PATH:
+Visit **https://galdrabok.github.io/DoseTraceAI/** and select **Explore demo → Enter Demo**.
 
-```sh
-export PATH=/Users/ranveer/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH
-./node_modules/.bin/vite --host 127.0.0.1
-```
+No account, password, or API key is required.
 
-## Demo journey
+## The Problem
 
-Overview → Review patient → Why this pattern? → Signals / Timeline → Clinical review → add a note and choose outcome → Save review → History.
+Clinicians can see a prescription and a treatment outcome, but often have limited visibility into what happens between visits.
 
-Settings adjusts the review threshold immediately. Local storage retains reviews, profile and appearance preferences; session storage retains demo sign-in. Live AI Simulation presents the scripted 24% → 87% evidence sequence. The example review saved during verification is labeled “Demo verification”.
+An occasional missed or delayed dose can be difficult to distinguish from other causes of changing symptoms. DoseTrace explores how multiple observations can help identify patterns that deserve clinical attention.
+
+## How It Works
+
+DoseTrace brings together five signal sources:
+
+- Pharmacy refill records
+- Prescription history
+- Symptoms and vitals
+- Wearable activity
+- Follow-up observations
+
+The demo reasoning model compares observations with patient-specific baselines, checks repeated deviations, and evaluates signal agreement. Missing data, conflicting signals, and alternative explanations reduce confidence.
+
+The output is **“Possible adherence disruption”**, with evidence for a clinician to review.
 
 ## Features
 
-Landing and demo authentication; dashboard; searchable and sortable patient directory; dynamic patient profiles; medication refill history; five-signal fusion; explainable score contributions; uncertainty and alternative explanations; timeline filters and details; review checklist, notes, statuses and persisted history; analytics and cohort drill-down; AI insights; notifications; threshold settings; responsive sidebar; light/dark appearance; reduced-motion support; Live AI Simulation.
+- Dashboard with patient summaries and a priority review queue
+- Twenty fictional patients with search, filters, and sorting
+- Dynamic patient profiles and baseline comparisons
+- Interactive signal fusion and step-by-step reasoning
+- Confidence explanations and alternative causes
+- Medication refill history and filtered patient timelines
+- Clinical review checklists, notes, and status changes
+- Saved review history
+- Population analytics and cohort exploration
+- Notifications and adjustable review thresholds
+- Live AI Simulation
+- Responsive navigation and light/dark appearance
 
-## Validation
+## Suggested Demo Flow
+
+1. Enter the demo and open **Patients**.
+2. Search for **DT-1042** and open the patient profile.
+3. Compare the observed refill interval, symptoms, and activity with the baseline.
+4. Select **Why this pattern?** to inspect the reasoning.
+5. Explore **Signals**, **Timeline**, and alternative explanations.
+6. Open **Clinical review**, add a note, choose an outcome, and save.
+7. View the saved decision in **History**.
+8. Run **Live AI Simulation** from the sidebar.
+
+To start fresh, use **Settings → Reset demo data**.
+
+## Technology
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide icons
+- Recharts
+- GitHub Pages
+
+The prototype runs entirely in the browser using local mock data. It does not require a backend.
+
+## Run Locally
+
+Requires Node.js 22 or later.
 
 ```sh
-pnpm build
-pnpm test
-```
-
-TypeScript and production build pass. Four model tests cover scoring, evidence penalties, threshold eligibility, and saved review precedence. Browser verification covered login, review persistence, history, and live threshold changes.
-
-## Prototype boundaries
-
-The reasoning score is an illustrative rule-based score, not a calibrated probability or clinically validated model. The Live AI Simulation is scripted. Trend charts are labeled illustrative; cohort counts and medication comparisons derive from the local patient records. Demo authentication is not a security boundary. No diagnosis or medication changes are made automatically. Dates reflect the fictional September 2026 demo window.
+git clone https://github.com/GALDRABOK/DoseTraceAI.git
+cd DoseTraceAI
+npm install
+npm run dev
